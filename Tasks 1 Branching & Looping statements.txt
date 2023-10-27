@@ -1,0 +1,157 @@
+1)Write a program to print the numbers from 10 to 50 using for loop/while loop.
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	   Scanner ip = new Scanner(System.in);
+	   int num = ip.nextInt();
+	   for(int i=num;i<=50;i++)
+	   {
+	       System.out.print(i+" ");
+	   }
+    }
+}
+
+Input
+10
+Output:
+10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50
+
+
+2)Find given number is negative or positive
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	   Scanner ip = new Scanner(System.in);
+	   int num = ip.nextInt();
+	   if(num<0)
+	   {
+	       System.out.println("Negative");
+	   }
+	   else{
+	       System.out.println("Positive");
+	   }
+    }
+}
+
+Input
+10
+Output:
+Positive
+
+
+3)Reverse the given number using loop.
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	   Scanner ip = new Scanner(System.in);
+	   int num = ip.nextInt();
+	   int rev = 0,  rem = 0;
+	   while(num!=0)
+	   {
+	        rem = num%10;
+	        rev = rev*10+rem;
+	        num = num/10;
+	   }
+	   System.out.println(rev);
+    }
+}
+
+Input
+876
+Output
+678
+
+
+4)Find the smallest number among three numbers.
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	   Scanner ip = new Scanner(System.in);
+	   int a = ip.nextInt();
+	   int b = ip.nextInt();
+	   int c = ip.nextInt();
+	   if(a<b && a<c)
+	   {
+	      System.out.println(a);
+	   }
+	   else if(b<a && b<c){
+	       System.out.println(b);
+	   }
+	   else{
+	       System.out.println(c);
+	   }
+	   
+    }
+}
+
+Input
+56 78 23
+Output
+23
+
+
+5)Calculate the final payable amount after applyingthe discount.
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	   Scanner ip = new Scanner(System.in);
+	   int amount = ip.nextInt();
+	   double discount;
+	   if(amount < 500)
+	   {
+	       System.out.println(amount+" is less than 500,no discount is applied");
+	   }
+	   else if(amount>=500 && amount<=1000)
+	   {
+	       System.out.println(amount+" is between 500 to 1000, 10% discount is applied ");
+	       discount = (amount*10)/100;
+	       System.out.println(amount-discount);
+	   }
+	   else if(amount>1000)
+	   {
+	       System.out.println(amount+" is greater than 1000, 20% discount is applied ");
+	       discount = (amount*20)/100;
+	       System.out.println(amount-discount);
+	   }
+	   
+    }
+}
+
+Input
+7500
+Output
+6000
+
+
+6)Write a java program to print bellowed pattern.
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+        for (int i = 5; i>=1; i--)   
+        {  
+        for (int j = 5; j>=i; j--)  
+        {  
+        System.out.print(j);  
+        }  
+        for(int k=1;k<=i-1;k++)
+        {
+            System.out.print(i);
+        }
+          System.out.println();
+        }  
+	   
+    }
+}
+
+Output:
+55555
+54444
+54333
+54322
+54321
