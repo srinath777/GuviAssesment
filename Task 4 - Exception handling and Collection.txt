@@ -1,0 +1,330 @@
+Q2)Create a class Voter(voterId,name,age) with parameterized constructor. The parameterized constructor should throw a checked exception if age is less than 18.
+Voter.java
+package com.guviTask4;
+
+public class Voter {
+	private int voterId;
+	private String name;
+	private int age;
+	
+	public Voter(int voterId,String name,int age) throws InvalidAgeVoterException {
+		this.voterId=voterId;
+		this.name=name;
+		//checking for InvalidAgeVoterException
+		if (age <= 18) {
+			throw new InvalidAgeVoterException("invalid age for voter");
+		} else {
+			this.age = age;
+		}
+	}
+	
+	public int getVoterId() {
+		return voterId;
+	}
+
+	public void setVoterId(int voterId) {
+		this.voterId = voterId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+
+	@Override
+	public String toString() {
+		return "Voter [voterId=" + voterId + ", name=" + name + ", age=" + age + "]";
+	}
+
+
+}
+
+InvalidAgeVoterException.java
+package com.guviTask4;
+
+public class InvalidAgeVoterException extends Exception{
+	//access parent class constructor using super keyowrd
+	public InvalidAgeVoterException(String message) {
+		super(message);
+	}
+	
+	public static void main(String[] agrs) {
+		try {
+			//object reference for Voter class
+			Voter vt = new Voter(101,"Srinath",22);
+			System.out.println(vt.toString());
+			Voter vt2 = new Voter(102,"Ram",16);
+			System.out.println(vt2.toString());
+			
+		} catch (InvalidAgeVoterException e) {
+			
+			System.out.println(e);
+		}
+	}
+}
+Output:
+Voter [voterId=101, name=Srinath, age=22]
+com.guviTask4.InvalidAgeVoterException: invalid age for voter
+
+
+
+Q3)
+package com.guviTask4;
+
+import java.util.Scanner;
+
+public class Weekdays {
+	public static void main(String[] agrs) {
+	//declaring weekdays Array
+	String[] weekdays = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday" };
+
+	System.out.println("Enter day Position :");
+	Scanner ip = new Scanner(System.in);
+		int position = ip.nextInt();
+		try {
+			System.out.println(weekdays[position]);
+		} 
+		catch (ArrayIndexOutOfBoundsException error) {
+			System.out.println(error.getMessage()+ " ArrayIndexOutOfBound Exception");
+}
+	}
+
+}
+Output
+Enter day Position :
+8
+Index 8 out of bounds for length 7 ArrayIndexOutOfBound Exception
+
+
+
+Q4)
+StudentGrade.java
+package com.guviTask4;
+
+import java.util.HashMap;
+
+public class StudentGrade {
+	public static void main(String[] args) {
+		// using HashMap class for Student
+		HashMap<String, Integer> studentMap = new HashMap<String, Integer>();
+		//adding student names and grades
+		studentMap.put("Bala", 7);
+		studentMap.put("Murugan", 8);
+		studentMap.put("Ram", 9);
+		studentMap.put("Srinath", 8);
+		studentMap.put("Harish", 8);
+		
+		System.out.println(studentMap);
+
+		//remove student from HashMap
+		studentMap.remove("Murugan", 8);
+		//display students after removing one student from hashmap
+		System.out.println(studentMap);
+	}
+
+}
+Output:
+{Srinath=8, Bala=7, Harish=8, Murugan=8, Ram=9}
+{Srinath=8, Bala=7, Harish=8, Ram=9}
+
+
+Q5)
+StackOperation.java
+package com.guviTask4;
+
+import java.util.Stack;
+
+public class StackOperation {
+	private Stack<Integer> list;
+
+	public StackOperation() {
+		this.list = new Stack<Integer>();
+	}
+	//add elements
+	public void add(int a) {
+		list.push(a);
+	}
+	//delete elements
+	public void pop() {
+		if (list.isEmpty()) {
+			throw new IllegalStateException("list is empty");
+		} else {
+			list.pop();
+		}
+	}
+	//display the stack
+	public void display() {
+		if (list.isEmpty()) {
+			throw new IllegalStateException("list is Empty");
+		} else {
+			System.out.println(list);
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		StackOperation stack = new StackOperation();
+
+		stack.add(28);
+		stack.add(32);
+		stack.add(10);
+		stack.add(36);
+		stack.display();
+		stack.pop();
+		stack.display();
+
+	}
+
+		
+	}
+Output:
+[28, 32, 10, 36]
+[28, 32, 10]
+
+
+
+Q1)
+Student.java
+package com.guviTask4;
+
+public class Student extends Exception {
+	private int rollno;
+	private String name;
+	private int age;
+	private String course;
+	
+	public static boolean nameValid(String name) {
+		int count = 0;
+
+		for (char c : name.toCharArray()) {
+			int num = c;
+
+			if ((num >= 97 && num <= 122) || (num >= 65 && num <= 90)) {
+				count++;
+			} else {
+				count--;
+			}
+		}
+
+		if (count == name.length()) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	
+	public Student(long roll_no, String name, int age, String course)
+			throws AgeNotWithinRangeException, NameNotValidException {
+
+		this.rollno = rollno;
+
+		if (age > 15 && age < 21) {
+			this.age = age;
+		} else {
+			throw new AgeNotWithinRangeException(
+					"Invalid Age of the Student Please Check ,AgeNotWithinRangeException Occured");
+		}
+
+		if (nameValid(name)) {
+			this.name = name;
+		} else {
+			throw new NameNotValidException("Invalid Name of the Student Please Check ,NameNotValidException Occured");
+		}
+		this.course = course;
+	}
+
+
+	
+	public int getRollno() {
+		return rollno;
+	}
+
+
+	public void setRollno(int rollno) {
+		this.rollno = rollno;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public int getAge() {
+		return age;
+	}
+
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+
+	public String getCourse() {
+		return course;
+	}
+
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Student [rollno=" + rollno + ", name=" + name + ", age=" + age + ", course=" + course + "]";
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method' stub
+		//System.out.println(st.getAge());
+			try {
+				Student s1 = new Student(101, "Srinath", 18, "IT");
+				System.out.println(s1.toString());
+				Student s2 = new Student(102, "Naveen", 22, "CSE");
+				System.out.println(s2.toString());
+				Student s3 = new Student(103, "Bala5", 16, "ECE");
+				System.out.println(s3.toString());
+			} catch (AgeNotWithinRangeException e) {
+				System.out.println(e);
+			} catch (NameNotValidException e) {
+				System.out.println(e);
+			}
+				
+		}
+	}
+AgeNotWithinRangeException.java
+package com.guviTask4;
+
+public class AgeNotWithinRangeException extends Exception{
+	public AgeNotWithinRangeException(String errorMessage) {
+		super(errorMessage);
+}
+}
+
+NameNotValidException.java
+package com.guviTask4;
+
+public class NameNotValidException extends Exception{
+	public NameNotValidException(String errorMessage) {
+		super(errorMessage);
+}
+}
+
