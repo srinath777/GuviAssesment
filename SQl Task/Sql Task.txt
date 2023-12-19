@@ -1,0 +1,119 @@
+create database Employee;
+
+use Employee;
+
+create table Empl (
+empno int,
+ename varchar(50),
+job varchar(50),
+mgr int,
+hiredate date,
+sal double,
+comm double,
+deptno int);
+
+use Employee;
+
+insert into Empl(empno,ename,job,mgr,hiredate,sal,comm,deptno)
+			values (8369,"SMITH","CLERK",8902,"1990-12-18",800.00,NULL,20);
+insert into Empl(empno,ename,job,mgr,hiredate,sal,comm,deptno)
+			values (8499,"ANYA","SALESMAN",8698,"1991-02-20",1600.00,300.00,30);
+insert into Empl(empno,ename,job,mgr,hiredate,sal,comm,deptno)
+			values (8521,"SETH","SALESMAN",8698,"1991-02-22",1250.00,500.00,30);
+insert into Empl(empno,ename,job,mgr,hiredate,sal,comm,deptno)
+			values (8566,"MAHADEVAN","MANAGER",8839,"1991-04-02",2985.00,NULL,20);
+insert into Empl(empno,ename,job,mgr,hiredate,sal,comm,deptno)
+			values (8654,"MOMIN","SALESMAN",8698,"1991-09-28",1250.00,1400.00,30);
+insert into Empl(empno,ename,job,mgr,hiredate,sal,comm,deptno)
+			values (8698,"BINA","MANAGER",8839,"1991-05-01",2850.00,NULL,30);
+insert into Empl(empno,ename,job,mgr,hiredate,sal,comm,deptno)
+			values (8882,"SHIVANSH","MANAGER",8839,"1991-06-09",2450.00,NULL,10);
+insert into Empl(empno,ename,job,mgr,hiredate,sal,comm,deptno)
+			values (8888,"SCOTT","ANALYST",8566,"1992-12-09",3000.00,NULL,20);
+insert into Empl(empno,ename,job,mgr,hiredate,sal,comm,deptno)
+			values (8839,"AMIR","PRESIDENT",NULL,"1991-11-16",5000.00,NULL,10);
+insert into Empl(empno,ename,job,mgr,hiredate,sal,comm,deptno)
+			values (8844,"KULDEEP","SALESMAN",8698,"1991-09-08",1500.00,0.00,30);
+
+
+2)
+
+
+a)SELECT ename,sal FROM Empl
+WHERE sal>=2200;
+
+b)SELECT* FROM Empl
+WHERE comm is null;
+
+c)SELECT ename , sal FROM Empl
+WHERE sal<=2500 OR sal>=4000;
+
+d)SELECT ename , job , sal FROM Empl
+WHERE mgr is null;
+
+e)SELECT ename FROM Empl
+WHERE SUBSTRING(ename,3,1)='A';
+
+f)SELECT ename FROM Empl
+WHERE ename LIKE "%T";
+
+
+3)
+
+package JdbcProgram;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class JdbcConnection {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+            // Establish a connection
+			Class.forName("com.mysql.jdbc.Driver");  
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Emp","root", "Database");
+            PreparedStatement preparedStatement = connection.prepareStatement("insert employee(empcode,empname,empage,esalary) values (?,?,?,?)");
+            
+            preparedStatement.setInt(1, 101);
+			preparedStatement.setString(2, "Jenny");
+			preparedStatement.setInt(3, 25);
+			preparedStatement.setDouble(4, 10000);
+            preparedStatement.executeUpdate();
+
+			preparedStatement.setInt(1, 103);
+			preparedStatement.setString(2, "Joe");
+			preparedStatement.setInt(3, 20);
+			preparedStatement.setDouble(4, 40000);
+            preparedStatement.executeUpdate();
+
+
+			preparedStatement.setInt(1, 102);
+			preparedStatement.setString(2, "Jacky");
+			preparedStatement.setInt(3, 30);
+			preparedStatement.setDouble(4, 20000);
+            preparedStatement.executeUpdate();
+
+
+			preparedStatement.setInt(1, 104);
+			preparedStatement.setString(2, "John");
+			preparedStatement.setInt(3, 40);
+			preparedStatement.setDouble(4, 80000);
+            preparedStatement.executeUpdate();
+
+			preparedStatement.setInt(1, 105);
+			preparedStatement.setString(2, "Shameer");
+			preparedStatement.setInt(3, 25);
+			preparedStatement.setDouble(4, 90000);
+			
+            preparedStatement.executeUpdate();
+            System.out.println("Data inserted");
+
+        } catch(Exception e) { 
+        	System.out.println(e);
+        	}  
+	}
+
+}
