@@ -51,7 +51,7 @@ db.companydrives.aggregate([
 
 
 4) Find the number of problems solved by the user in codekata
-Ans:db.User.aggregate([
+Ans:db.users.aggregate([
   {
     $project: {
 _id:0,
