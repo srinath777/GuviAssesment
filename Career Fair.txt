@@ -1,0 +1,177 @@
+1)
+
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+public class Isomorphic {
+    public static boolean isIsomorphic(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        
+        Map<Character, Character> map = new HashMap<>();
+        
+        for (int i = 0; i < s.length(); i++) {
+            char sChar = s.charAt(i);
+            char tChar = t.charAt(i);
+            
+            if (map.containsKey(sChar)) {
+                if (map.get(sChar) != tChar) {
+                    return false;
+                }
+            } else {
+                // Check if tChar is already mapped to by another key in the map
+                if (map.containsValue(tChar)) {
+                    return false;
+                }
+                map.put(sChar, tChar);
+            }
+        }
+        return true;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s1 = sc.next();
+        String t1 = sc.next();
+        isIsomorphic(s1, t1); // Output: true
+    }
+}
+
+2)
+
+import java.util.*;
+public class HappyNumber {
+    public static boolean isHappy(int n) {
+        int slow = n;
+        int fast = n;
+        
+        do {
+            slow = sumOfSquaresOfDigits(slow);
+            fast = sumOfSquaresOfDigits(sumOfSquaresOfDigits(fast));
+            
+            if (slow == 1) {
+                return true;
+            }
+        } while (slow != fast);
+        
+        return false;
+    }
+    
+    private static int sumOfSquaresOfDigits(int n) {
+        int sum = 0;
+        while (n > 0) {
+            int digit = n % 10;
+            sum += digit * digit;
+            n /= 10;
+        }
+        return sum;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        System.out.println(isHappy(n));
+    }
+}
+
+3)
+
+import java.util.*;
+
+public class NoDuplicateElements {
+    public static boolean containsDuplicate(int[] nums) {
+        Set<Integer> s = new HashSet<>();
+        for (int num : nums) {
+            if (s.contains(num)) {
+                return true;
+            }
+            s.add(num);
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] str = sc.nextLine().split(" ");
+
+        int n = in.length;
+        int[] arr = new int[n];
+
+        for (int i = 0; i < n; i++) {
+        arr[i] = Integer.parseInt(in[i]);
+        }
+
+        System.out.println(containsDuplicate(arr));
+    }
+}
+
+
+4)
+
+import java.util.*;
+
+public class NonRepeating {
+    public static int firstUniqChar(String s) {
+        Map<Character, Integer> charMap = new LinkedHashMap<>();
+        
+        for (char ch : s.toCharArray()) {
+            charMap.put(ch, charMap.getOrDefault(ch, 0) + 1);
+        }
+        
+        for (Map.Entry<Character, Integer> entry : charMap.entrySet()) {
+            if (entry.getValue() == 1) {
+                return s.indexOf(entry.getKey());
+            }
+        }
+        
+        return -1;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        System.out.println(firstUniqChar(s));
+    }
+}
+
+5)
+
+import java.util.Scanner;
+
+public class LicenseKeyFormat {
+    public static String licenseKeyFormatting(String s, int k) {
+        StringBuilder sb = new StringBuilder();
+        
+        for (char ch : s.toCharArray()) {
+            if (ch != '-') {
+                sb.append(Character.toUpperCase(ch));
+            }
+        }
+        
+        int n = sb.length();
+        int firstGroupLength = n % k;
+        
+        StringBuilder result = new StringBuilder();
+        
+        if (firstGroupLength > 0) {
+            result.append(sb.substring(0, firstGroupLength));
+        }
+        
+        for (int i = firstGroupLength; i < n; i += k) {
+            if (result.length() > 0) {
+                result.append('-');
+            }
+            result.append(sb.substring(i, Math.min(i + k, n)));
+        }
+        
+        return result.toString();
+    }
+    
+    public static void main(String[] args) {
+       
+        Scanner sc = new Scanner(System.in);
+
+        String s2 = sc.nextLine();
+        int k2 = sc.nextInt();
+        System.out.println(licenseKeyFormatting(s2, k2)); 
+    }
+}
